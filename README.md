@@ -8,9 +8,9 @@
 1. copy the ShadowButton.js file or its content into your React project.
 2. import the ShadowButton component to your file:
     ```js
-        import ShadowButton from './ShadowButton';
+    import ShadowButton from './ShadowButton';
     ```
-3. instanciate the ShadowButton component, e.g:
+3. instantiate the ShadowButton component, e.g:
     ```html
     <ShadowButton 
         class={"yourShadowButton"} onClickFunction={this.yourClickFunction} text={"your text"} styles=
@@ -23,7 +23,7 @@
             }}
     />
     ```
-5. position the button in a CSS file using your given class name, e.g:
+4. position the button in a CSS file using your given class name, e.g:
     ```css
     .yourShadowButton {
         position: absolute;
@@ -33,20 +33,30 @@
     ```
 
 ## Documentation:
-- ```class``` : A class identifier for your button
-- ```text``` : The inner text of your button
-- ```onClickFunction``` : The function your want to call by pressing your button
-- ```styles``` : An json object storing the style properties of your button
-  properties:
-  - ```width``` : (required)
-  - ```height``` : (required)
-  - ```color``` : (required)
-  - ```borderWidth``` : (default: ```"6px"```)
-  - ```borderRadius``` : (default: ```"10px"```)
-  - ```fontFamily``` : (default: ```"Arial"```)
-  - ```fontSize``` : (default: ```"20px"```)
-  - ```opacity``` : (default: ```".125"```)
-  - ```zIndex``` : (default: ```1```)
+
+### props:
+| prop | |
+| ------------- |:-------------:|
+| ```class``` | A class identifier for your button. |
+| ```text``` | The inner text of your button. |
+| ```onClickFunction``` | The function your want to call by pressing your button. |
+| ```styles``` | A json object storing the style properties of your button (see below). |
+
+
+### style properties:
+| style property | required | default |
+| ------------- |:-------------:| -----:|
+| ```width``` | yes | - |
+| ```height``` | yes | - |
+| ```color``` | yes | - |
+| ```borderWidth``` | no | ```"6px"``` |
+| ```borderRadius``` | no | ```"10px"``` |
+| ```fontFamily``` | no | ```"Arial"``` |
+| ```fontSize``` | no | ```"20px"``` |
+| ```opacity``` | no | ```".125"``` |
+| ```zIndex``` | no | ```1``` |
+#### Note: only ```zIndex``` is an integer, all other properties are strings.
+
 
 ## More examples (code for the buttons in the GIF above):
 ```html
