@@ -6,7 +6,8 @@ export default class ShadowButton extends React.Component {
     constructor(props) {
         super(props);
 
-        this.setClickStyle = this.setClickStyle.bind(this);
+        this.callClickFunction = this.callClickFunction.bind(this);
+        this.triggerClick = this.triggerClick.bind(this);
 
         this.state = {
             posLeft: null,
@@ -18,13 +19,13 @@ export default class ShadowButton extends React.Component {
         this.text = this.props.text;
 
         this.customStyles = {
-            width: this.props.styles.width || "200px",
-            height: this.props.styles.height || "140px",
-            color: this.props.styles.color || "rgb(94, 91, 245)",
+            width: this.props.styles.width,
+            height: this.props.styles.height,
+            color: this.props.styles.color,
             borderWidthAsInt: this.stringStyleToInt(this.props.styles.borderWidth || "6px"),
             borderRadius: this.props.styles.borderRadius || "10px",
             fontFamily: this.props.styles.fontFamily || "Arial",
-            fontSize: this.props.styles.fontSize || "14px",
+            fontSize: this.props.styles.fontSize || "20px",
             opacity: this.props.styles.opacity || ".125",
             zIndex: this.props.styles.zIndex || 1
         }
@@ -57,27 +58,42 @@ export default class ShadowButton extends React.Component {
         }
     }
 
-    componentDidMount() {
-        var rect = ReactDOM.findDOMNode(this).getBoundingClientRect();
-        this.setState({posLeft: rect.left, posTop: rect.top});
-    }
-
     stringStyleToInt(style) {
         return parseInt(style.split("px")[0]);
     }
 
-    setClickStyle(mouseIsDown) {
-        let button = document.getElementsByClassName(this.buttonClass)[0];
-        button.style.marginLeft = mouseIsDown ? 2 * this.customStyles.borderWidthAsInt + "px" : "0px";
-        button.style.marginTop = mouseIsDown ? 2 * this.customStyles.borderWidthAsInt + "px" : "0px";
+    triggerClick() {
+        try {
+            let button = document.getElementsByClassName(this.buttonClass)[0];
+            let borderWidth = this.customStyles.borderWidthAsInt;
 
+            button.addEventListener("mousedown", function handler() {
+                button.style.marginLeft = 2 * borderWidth + "px";
+                button.style.marginTop = 2 * borderWidth + "px";
+            });
+        }
+        catch {
+            // button not rendered yet
+        }
+    }
+
+    callClickFunction() {
+        let button = document.getElementsByClassName(this.buttonClass)[0];
+        button.style.marginLeft = "0px";
+        button.style.marginTop = "0px";
         this.props.onClickFunction();
+    }
+
+    componentDidMount() {
+        var rect = ReactDOM.findDOMNode(this).getBoundingClientRect();
+        this.setState({posLeft: rect.left, posTop: rect.top});
+        this.triggerClick();
     }
 
     render() {
         return (
             <div className={this.class_}>
-                <button className={this.buttonClass} style={this.buttonStyles} onMouseDown={() => this.setClickStyle(true)} onMouseUp={() => this.setClickStyle(false)}>
+                <button className={this.buttonClass} style={this.buttonStyles} onClick={() => this.callClickFunction()}>
                     <b>{this.text}</b>
                 </button>
 

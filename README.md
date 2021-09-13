@@ -37,7 +37,7 @@
 ### props:
 | prop | description |
 | ------------- |:-------------:|
-| ```class``` | A class identifier for your button. |
+| ```class``` | A class identifier for your button container (to access only the button without the shadow in JS use '```s-button-<your class name>```' as class). |
 | ```text``` | The inner text of your button. |
 | ```onClickFunction``` | The function your want to call by pressing your button. |
 | ```styles``` | A json object storing the style properties of your button (see below). |
@@ -56,7 +56,6 @@
 | ```opacity``` | no | ```".125"``` |
 | ```zIndex``` | no | ```1``` |
 #### Note: only ```zIndex``` is an integer, all other properties are strings.
-
 
 ## More examples (code for the buttons in the GIF above):
 ```html
